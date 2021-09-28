@@ -36,7 +36,7 @@
     private void HandleClick(int i)
     {
         bool xToPlay = xIsNext;
-        values[i] = values[i] == 'O' ? 'X' : 'O';
+        values[i] = xToPlay ? 'X' : 'O';
         xIsNext = !xToPlay;
     }
 }
