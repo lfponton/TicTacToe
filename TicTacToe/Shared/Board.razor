@@ -59,6 +59,18 @@
 
     private void HandleClick(int i)
     {
+        if (values[i] != ' ')
+        {
+            return;
+        }
+
+        bool isGameFinished = Helper.CalculateGameStatus(values) != GameStatus.NotYetFinished;
+
+        if (isGameFinished)
+        {
+            return;
+        }
+        
         bool xToPlay = xIsNext;
         values[i] = xToPlay ? 'X' : 'O';
         xIsNext = !xToPlay;
