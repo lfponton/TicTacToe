@@ -1,4 +1,5 @@
-﻿<div class="square" @onclick="ChangeValue">@value</div>
+﻿<div class="square" @onclick="@ClickHandler">@value</div>
+
 <style scoped>
     .square {
         background-color: rgba(255, 255, 255, 0.8);
@@ -15,13 +16,13 @@
     .square:hover {
         background-color: rgba(106, 202, 9, 0.8);
     }
-
+    
 </style>
-@code {
-    private char value = ' ';
-
-    private void ChangeValue()
-    {
-        value = value == 'O' ? 'X' : 'O';
-    }
+@functions
+{
+    [Parameter]
+    public char value { get; set; }
+    [Parameter]
+    public EventCallback ClickHandler { get; set; }
+}
 }
