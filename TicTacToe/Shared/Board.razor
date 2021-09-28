@@ -1,11 +1,12 @@
-﻿<div class="board">
-@for (int i = 0; i < 9; i++)
-{
-    int squareNumber = i;
-    <Square @key=squareNumber
-            value=values[squareNumber]
-            ClickHandler="@(() => HandleClick(squareNumber))"/>
-}
+﻿<h3>Next player: "@(xIsNext ? 'X' : 'O')"</h3>
+<div class="board">
+    @for (int i = 0; i < 9; i++)
+    {
+        int squareNumber = i;
+        <Square @key=squareNumber
+                value=values[squareNumber]
+                ClickHandler="@(() => HandleClick(squareNumber))"/>
+    }
 </div>
 <style scoped>
     .board {
@@ -20,18 +21,22 @@
 </style>
 
 @code {
+    private bool xIsNext;
     private char[] values = new char[9];
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
         values = new char[9]
         {
             ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '
         };
+        xIsNext = true;
     }
 
     private void HandleClick(int i)
     {
+        bool xToPlay = xIsNext;
         values[i] = values[i] == 'O' ? 'X' : 'O';
+        xIsNext = !xToPlay;
     }
 }
