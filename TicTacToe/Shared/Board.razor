@@ -32,6 +32,11 @@
                 ClickHandler="@(() => HandleClick(squareNumber))"/>
     }
 </div>
+
+<button class="btn btn-primary" @onclick="PlayAgainHandler">
+    New game
+</button>
+
 <style scoped>
     .board {
         display: grid;
@@ -42,19 +47,33 @@
         height: 200px;
         border-radius: 10%;
     }
+    button {
+      border-radius: 10%;
+      margin: 10px;
+    }
 </style>
 
 @code {
     private bool xIsNext;
     private char[] values = new char[9];
 
-    protected override void OnInitialized()
+    private void InitState()
     {
         values = new char[9]
         {
             ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '
         };
         xIsNext = true;
+    }
+
+    protected override void OnInitialized()
+    {
+        InitState();
+    }
+
+    private void PlayAgainHandler()
+    {
+        InitState();
     }
 
     private void HandleClick(int i)
